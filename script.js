@@ -39,6 +39,58 @@ navigationLinks.forEach((link) => {
 // NAVIGATION
 // ========================================
 
+// ========================================
+// NAVBAR SCROLL STATE
+// ========================================
+
+const navbar = document.querySelector(".navbar");
+
+function updateNavbar() {
+    navbar.classList.toggle("scrolled", window.scrollY > 40);
+}
+
+window.addEventListener("scroll", updateNavbar, { passive: true });
+
+updateNavbar();
+
+// ========================================
+// ACTIVE NAVIGATION
+// ========================================
+
+const sections = document.querySelectorAll("main section");
+const navLinksForSections = document.querySelectorAll(".nav-links a");
+
+const sectionObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+
+            if (!entry.isIntersecting) {
+                return;
+            }
+
+            navLinksForSections.forEach((link) => {
+                link.classList.remove("active");
+            });
+
+            const activeLink = document.querySelector(
+                `.nav-links a[href="#${entry.target.id}"]`
+            );
+
+            if (activeLink) {
+                activeLink.classList.add("active");
+            }
+        });
+    },
+    {
+        root: null,
+        threshold: 0.25
+    }
+);
+
+sections.forEach((section) => {
+    sectionObserver.observe(section);
+});
+
 
 // ========================================
 // INTERACTIONS

@@ -798,6 +798,23 @@ header {
     background: var(--surface-light);
 }
 
+.nav-links a.active {
+    color: var(--text-primary);
+    background: var(--surface-light);
+}
+
+/* ========================================
+   NAVBAR SCROLL STATE
+======================================== */
+
+.navbar.scrolled {
+    background: rgb(10 10 10 / 80%);
+    border-color: var(--border);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
 
 /* ========================================
    ABOUT REFINEMENT
