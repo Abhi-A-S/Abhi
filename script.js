@@ -81,10 +81,63 @@ const sectionObserver = new IntersectionObserver(
         });
     },
     {
-        threshold: 0.25
+        rootMargin: "-75% 0px 0px 0px",
+        threshold: 0
     }
 );
 
 sections.forEach((section) => {
     sectionObserver.observe(section);
+});
+
+
+// ========================================
+// SMOOTH SECTION SCROLLING
+// ========================================
+
+navigationLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+        const targetId = link.getAttribute("href");
+
+        if (!targetId.startsWith("#")) {
+            return;
+        }
+
+        const target = document.querySelector(targetId);
+
+        if (!target) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const startPosition = window.scrollY;
+        const targetPosition =
+            target.getBoundingClientRect().top + window.scrollY - 15;
+
+        const distance = targetPosition - startPosition;
+        const duration = 700;
+        const startTime = performance.now();
+
+        function scrollAnimation(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            const easedProgress =
+                progress < 0.5
+                    ? 2 * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+            window.scrollTo(
+                0,
+                startPosition + distance * easedProgress
+            );
+
+            if (progress < 1) {
+                requestAnimationFrame(scrollAnimation);
+            }
+        }
+
+        requestAnimationFrame(scrollAnimation);
+    });
 });

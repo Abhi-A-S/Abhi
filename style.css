@@ -67,6 +67,10 @@ select {
    GLOBAL
 ======================================== */
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     min-height: 100vh;
 
@@ -267,7 +271,7 @@ header {
 
     font-size: 0.9rem;
 
-    transition: color 200ms ease;
+    transition: color 10500ms ease;
 }
 
 .text-link:hover,
@@ -314,7 +318,13 @@ header {
 .skills,
 .projects,
 .contact {
-    padding-block: var(--space-xl);
+    min-height: 100svh;
+
+    padding-block: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .section-header {
@@ -344,7 +354,7 @@ header {
 .section-header h2 {
     max-width: 800px;
 
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-size: clamp(1.75rem, 3.5vw, 3rem);
     line-height: 1;
     letter-spacing: -0.055em;
 }
@@ -366,17 +376,18 @@ header {
 }
 
 .about-intro p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 
     color: var(--text-secondary);
 
-    font-size: 1.1rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
 }
 
 .about-intro p:first-child {
     color: var(--text-primary);
 
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-size: 1.1rem;
     line-height: 1.5;
 }
 
@@ -389,7 +400,7 @@ header {
     grid-template-columns: 3rem 1fr;
     gap: 1rem;
 
-    padding-block: 1.5rem;
+    padding-block: 0.85rem;
 
     border-bottom: 1px solid var(--border);
 
@@ -431,7 +442,8 @@ header {
 
 .about-item p {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
 }
 
 
@@ -442,18 +454,14 @@ header {
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
-    border-top: 1px solid var(--border);
-    border-left: 1px solid var(--border);
 }
 
 .skill-category {
-    min-height: 220px;
+    min-height: 140px;
 
-    padding: 1.75rem;
+    padding: 1.25rem;
 
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    border: 1px solid var(--border);
 
     transition: background-color 250ms ease;
 }
@@ -462,9 +470,13 @@ header {
     background: var(--surface);
 }
 
-.skill-number {
-    display: block;
+.skill-heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
+.skill-number {
     color: var(--text-muted);
     font-size: 0.75rem;
 
@@ -476,8 +488,7 @@ header {
 }
 
 .skill-category h3 {
-    margin-top: 2.5rem;
-    margin-bottom: 1.25rem;
+    margin: 0;
 
     font-size: 1rem;
 
@@ -491,8 +502,8 @@ header {
 .skill-category li {
     display: inline-block;
 
-    margin: 0 0.35rem 0.4rem 0;
-    padding: 0.3rem 0.6rem;
+    margin: 0 0.3rem 0.3rem 0;
+    padding: 0.3rem 0.55rem;
 
     border: 1px solid var(--border);
 
@@ -513,11 +524,11 @@ header {
 }
 
 .skill-status {
-    margin-top: 1rem;
+    margin-top: 0.6rem;
 
     color: var(--text-muted);
 
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
@@ -605,7 +616,7 @@ header {
 .project-title h3 {
     max-width: 800px;
 
-    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
     line-height: 1;
     letter-spacing: -0.045em;
 
@@ -769,7 +780,7 @@ header {
     outline-offset: 4px;
 }
 
-@media (prefers-reduced-motion: reduce) {
+/*@media (prefers-reduced-motion: reduce) {
 
     html {
         scroll-behavior: auto;
@@ -782,12 +793,18 @@ header {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-}
+}*/
 
 
 /* ========================================
    RESPONSIVE
 ======================================== */
+
+@media (min-width: 769px) {
+    .skill-category:last-child {
+        grid-column: 2;
+    }
+}
 
 @media (max-width: 768px) {
 
@@ -829,12 +846,21 @@ header {
         grid-template-columns: 1fr;
     }
 
+    .about-item:hover,
+    .about-item:focus-within {
+        padding-left: 0;
+    }
+
     .skills-grid {
         grid-template-columns: 1fr 1fr;
     }
 
     .project {
         grid-template-columns: 3rem 1fr;
+    }
+
+    .project:hover .project-title h3 {
+        transform: none;
     }
 
     .footer {
