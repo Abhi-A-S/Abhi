@@ -1,8 +1,19 @@
 "use strict";
 
+// ========================================
+// DOM REFERENCES
+// ========================================
+
 const menuToggle = document.querySelector(".menu-toggle");
 const navLinks = document.querySelector(".nav-links");
 const navigationLinks = document.querySelectorAll(".nav-links a");
+const navbar = document.querySelector(".navbar");
+const sections = document.querySelectorAll("main section");
+
+
+// ========================================
+// MOBILE NAVIGATION
+// ========================================
 
 function toggleMenu() {
     const isOpen = navLinks.classList.toggle("active");
@@ -30,20 +41,10 @@ navigationLinks.forEach((link) => {
     link.addEventListener("click", closeMenu);
 });
 
-// ========================================
-// DOM REFERENCES
-// ========================================
-
-
-// ========================================
-// NAVIGATION
-// ========================================
 
 // ========================================
 // NAVBAR SCROLL STATE
 // ========================================
-
-const navbar = document.querySelector(".navbar");
 
 function updateNavbar() {
     navbar.classList.toggle("scrolled", window.scrollY > 40);
@@ -53,12 +54,10 @@ window.addEventListener("scroll", updateNavbar, { passive: true });
 
 updateNavbar();
 
+
 // ========================================
 // ACTIVE NAVIGATION
 // ========================================
-
-const sections = document.querySelectorAll("main section");
-const navLinksForSections = document.querySelectorAll(".nav-links a");
 
 const sectionObserver = new IntersectionObserver(
     (entries) => {
@@ -68,7 +67,7 @@ const sectionObserver = new IntersectionObserver(
                 return;
             }
 
-            navLinksForSections.forEach((link) => {
+            navigationLinks.forEach((link) => {
                 link.classList.remove("active");
             });
 
@@ -82,7 +81,6 @@ const sectionObserver = new IntersectionObserver(
         });
     },
     {
-        root: null,
         threshold: 0.25
     }
 );
@@ -90,23 +88,3 @@ const sectionObserver = new IntersectionObserver(
 sections.forEach((section) => {
     sectionObserver.observe(section);
 });
-
-
-// ========================================
-// INTERACTIONS
-// ========================================
-
-
-// ========================================
-// SCROLL BEHAVIOUR
-// ========================================
-
-
-// ========================================
-// ANIMATIONS
-// ========================================
-
-
-// ========================================
-// ACCESSIBILITY
-// ========================================
